@@ -10,7 +10,7 @@ Window::Window() {
 }
 
 Window::~Window() {
-    endwin();    // zakończenie trybu curses
+    endwin();    // zakończenie trybu ncurses
 }
 
 void Window::initWindow() {

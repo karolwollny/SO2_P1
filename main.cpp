@@ -14,9 +14,9 @@ bool finish = true;
 vector<thread> threads;
 
 void moveBall(Ball * b){
-    while((b->getSpeed() < 100) && finish == true) {
+    while((b->getSpeed() < 1000) && finish == true) {
         b->mov();
-        usleep(b->getSpeed() * 20000);
+        usleep(b->getSpeed() * 2000);
     }
 }
 
@@ -26,13 +26,13 @@ void ballGenerator(){
     while(finish){
 
         tmpV = rand() % 5 + 1;
-        tmpS = rand() % 5 + 1;
+        tmpS = rand() % 10 + 20;
         Ball *ball = new Ball(tmpV,tmpS);
         balls.push_back(ball);
 
         threads.push_back(thread(moveBall,balls.back()));
 
-        usleep(5000000);
+        usleep(2000000);
     }
 }
 
@@ -44,7 +44,7 @@ void windowRefresh(){
             balls[i]->drawBall();
         }
         refresh();
-        usleep(10000);
+        usleep(100);
     }
 
 }
@@ -85,6 +85,9 @@ int main() {
     }
     attroff(COLOR_PAIR(2));
 
-    getch();
+    for(int i =0; i<balls.size(); i++){
+        delete balls[i];
+    }
+    delete window;
     return 0;
 }

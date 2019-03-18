@@ -116,12 +116,21 @@ void Ball::mov() {
         }
     }
 
-    //drawBall();
-    speed = speed * 1.3;
+    if(vector == 2 || vector == 3 || vector == 4){
+        speed = speed + 5;
+
+    }
+    else if (vector == 6 || vector == 7 || vector == 8){
+        if(speed > 5){
+            this->speed = this->speed - 5 ;
+        }
+    }
+
+
 }
 
 void Ball::drawBall() {
-    if(speed < 100){
+    if(speed < 1000){
     move(positionY,positionX);
     printw("o");
     move(prevY,prevX);
@@ -138,7 +147,6 @@ void Ball::drawBall() {
 }
 
 Ball::~Ball() {
-    delete this;
 }
 
 int Ball::getSpeed() {
